@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<body>
+<main role="main">
+    <div th:replace="fragments.html :: jumbo"></div>
+    <div class="container">
+        <div class="row">
+            <p>Your results are:</p>
+        </div>
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="event : ${decathlonScoreResponse}">
+                        <td th:text="${event.key.getEventName()}"></td>
+                        <td th:text="${event.value}"></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>TOTAL:</th>
+                        <th th:text="${decathlonScoreTotal}"></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <hr>
+        <a href="/">Go back</a>
+    </div>
+</main>
+</body>
+</html>

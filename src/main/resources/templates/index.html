@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<body>
+<main role="main">
+    <div th:replace="fragments.html :: jumbo"></div>
+    <div class="container">
+        <div class="row">
+            <p>Enter your results here:</p>
+        </div>
+        <div class="row">
+            <form action="#" method="POST" th:action="@{/results}"
+                  th:object="${decathlonScoreRequest}">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Result</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="event : ${decathlonEvents}">
+                        <td th:for="${event.name()}">
+                            <label th:text="${event.getEventName()}"></label>
+                        </td>
+                        <td>
+                            <input type="number" th:id="${event.name()}"
+                                   th:field="*{results[__${event.name()}__]}"
+                                   step="0.001" min="0" th:placeholder="${event.getMeasurement()}"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <input type="submit" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>
